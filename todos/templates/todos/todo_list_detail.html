@@ -5,10 +5,16 @@
 {% block content %}
     <h2>{{ todo_list.name }}</h2>
     <ul>
-    {% for item in todo_list.item_set.all %}
-        <li>{{ item.name }} - {{ item.created_at }}
-        </li>
-    {% endfor %}
+        {% for item in todo_list.item_set.all %}
+            <li>
+                {{ item.name }} - {{ item.created_at }}
+                {% if item.completed %}
+                    <input type="checkbox" checked="checked" disabled="disabled"/>
+                {% else %}
+                    <input type="checkbox" disabled="disabled"/>
+                {% endif %}
+            </li>
+        {% endfor %}
     </ul>
 
 {% endblock %}
