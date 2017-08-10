@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ item.name }}{% endblock %}
 
 {% block content %}
+    <h3><a href="{% url 'todos:todo_list_detail' todo_list_pk=item.todo_list.pk %}">{{ item.todo_list.name }}</a></h3>
+    <h2>{{ item.name }}</h2>
+    <p>{{ item.description }}</p>
 {% endblock %}

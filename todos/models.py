@@ -18,7 +18,7 @@ class Item(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     completed = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
-    todoList = models.ForeignKey(TodoList)
+    todo_list = models.ForeignKey(TodoList)
 
     class Meta:
         ordering = ["order",]
