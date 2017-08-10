@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ todo_list.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ todo_list.name }}</h2>
+    <ul>
+    {% for item in todo_list.item_set.all %}
+        <li>{{ item.name }} - {{ item.created_at }}
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

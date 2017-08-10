@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Courses</h1>
     {% for todo_list in todo_lists  %}
-        {{ todo_list.name }}
+        <a href="{% url 'todos:todo_list_detail' todo_list_pk=todo_list.pk%}">{{ todo_list.name }}</a>
         {{ todo_list.created_at }}
     {% endfor %}
 {% endblock %}
