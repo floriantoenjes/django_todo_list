@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
@@ -30,3 +31,16 @@ def item_create(request, todo_list_pk):
             return HttpResponseRedirect(item.get_absolute_url())
 
     return render(request, "todos/item_form.html", {"form": form, "todo_list": todo_list})
+
+def item_edit(request, item_pk, todo_list_pk):
+    item = get_object_or_404(Item, pk=item_pk, todo_list_id=todo_list_pk)
+    form = ItemForm(instance=item)
+
+    if request.method == "POST":
+        form = ItemForm(instance=item, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Updated {}".format(form.cleaned_data["name"]))
+            return HttpResponseRedirect(item.get_absolute_url())
+
+    return render(request, "todos/item_form.html", {"form": form, "todo_list": item.todo_list})

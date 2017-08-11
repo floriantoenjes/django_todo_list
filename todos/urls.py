@@ -7,4 +7,5 @@ urlpatterns = [
     url(r"^(?P<todo_list_pk>\d+)/$", views.todo_list_detail, name="todo_list"),
     url(r"^(?P<todo_list_pk>\d+)/create_item/$", views.item_create, name="create_item"),
     url(r"^(?P<todo_list_pk>\d+)/(?P<item_pk>\d+)/$", views.item_detail, name="item"),
+    url(r"^(?P<todo_list_pk>\d+)/edit_item/(?P<item_pk>\d+)/$", views.item_edit, name="edit_item"),
 ]

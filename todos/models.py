@@ -28,7 +28,7 @@ class Item(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("todos:item_detail", kwargs={
+        return reverse("todos:item", kwargs={
             "todo_list_pk": self.todo_list.pk,
             "item_pk": self.pk
         })
