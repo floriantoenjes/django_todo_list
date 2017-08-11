@@ -17,7 +17,7 @@ def item_detail(request, todo_list_pk, item_pk):
     item = get_object_or_404(Item, todo_list_id=todo_list_pk, pk=item_pk)
     return render(request, "todos/item_detail.html", {"item": item})
 
-def item_form(request, todo_list_pk):
+def item_create(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
     form = ItemForm()
 

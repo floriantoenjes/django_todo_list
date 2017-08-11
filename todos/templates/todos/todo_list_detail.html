@@ -7,7 +7,7 @@
     <ul>
         {% for item in todo_list.item_set.all %}
             <li>
-                <a href="{% url 'todos:item_detail' todo_list_pk=todo_list.pk item_pk=item.pk %}">{{ item.name }}</a>
+                <a href="{% url 'todos:item' todo_list_pk=todo_list.pk item_pk=item.pk %}">{{ item.name }}</a>
                 {{ item.created_at }}
                 {% if item.completed %}
                     <input type="checkbox" checked="checked" disabled="disabled"/>
