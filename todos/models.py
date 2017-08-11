@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
-# Create your models here.
+
 class TodoList(models.Model):
     name = models.CharField(max_length=60)
     created_at = models.DateTimeField(auto_now_add=True)
