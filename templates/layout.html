@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/layout.css' %}"/>
 </head>
 <body>
+    <a href="{% url 'todos:todo_list_overview' %}">Overview</a>
 {% block content %} {% endblock %}
 </body>
 </html>
