@@ -59,4 +59,4 @@ def item_edit(request, item_pk, todo_list_pk):
             messages.success(request, "Updated {}".format(form.cleaned_data["name"]))
             return HttpResponseRedirect(item.get_absolute_url())
 
-    return render(request, "todos/item_form.html", {"form": form, "todo_list": item.todo_list})
+    return render(request, "todos/item_form.html", {"item": item, "form": form, "todo_list": item.todo_list})

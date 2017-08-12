@@ -11,7 +11,7 @@ class TodoListForm(forms.ModelForm):
 class ItemForm(forms.ModelForm):
     class Meta:
         model = models.Item
-        fields = ["name", "description", "order"]
+        fields = ["name", "description", "order", "completed"]
 
 ItemFormSet = forms.modelformset_factory(
     models.Item,
