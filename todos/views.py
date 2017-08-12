@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
-from .forms import ItemForm
+from .forms import ItemForm, TodoListForm
 from .models import Item, TodoList
 
 
@@ -14,6 +14,12 @@ def todo_list_overview(request):
 def todo_list_detail(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
     return render(request, "todos/todo_list_detail.html", {"todo_list": todo_list})
+
+def todo_list_edit(request, todo_list_pk):
+    todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
+    form = TodoListForm(instance=todo_list)
+
+    return render(request, "todos/todo_list_form.html", {"form": form, "todo_list": todo_list})
 
 def item_detail(request, todo_list_pk, item_pk):
     item = get_object_or_404(Item, todo_list_id=todo_list_pk, pk=item_pk)

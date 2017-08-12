@@ -18,6 +18,8 @@
         {% endfor %}
     </ul>
     {% if user.is_authenticated %}
-        <a href="{% url 'todos:create_item' todo_list_pk=todo_list.pk %}">New Item</a>
+        <a href="{% url 'todos:edit_todo_list' todo_list_pk=todo_list.pk %}">Edit list</a>
+        <br/>
+        <a href="{% url 'todos:create_item' todo_list_pk=todo_list.pk %}">New item</a>
     {% endif %}
 {% endblock %}
