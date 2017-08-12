@@ -19,6 +19,13 @@ def todo_list_edit(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
     form = TodoListForm(instance=todo_list)
 
+    if request.method == "POST":
+        form = TodoListForm(instance=todo_list, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Created {}".format(form.cleaned_data["name"]))
+            return HttpResponseRedirect(todo_list.get_absolute_url())
+
     return render(request, "todos/todo_list_form.html", {"form": form, "todo_list": todo_list})
 
 def item_detail(request, todo_list_pk, item_pk):

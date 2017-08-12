@@ -13,6 +13,12 @@ class TodoList(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("todos:todo_list", kwargs={
+            "todo_list_pk": self.pk,
+        })
+
+
 class Item(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(default="")
