@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'todos.apps.TodosConfig',
 ]
 
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'todo_site.urls'
@@ -123,5 +125,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets"),
 )
 
-
 # TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda x: True
+}
