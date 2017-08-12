@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
@@ -18,6 +19,7 @@ def item_detail(request, todo_list_pk, item_pk):
     item = get_object_or_404(Item, todo_list_id=todo_list_pk, pk=item_pk)
     return render(request, "todos/item_detail.html", {"item": item})
 
+@login_required
 def item_create(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
     form = ItemForm()
@@ -32,6 +34,7 @@ def item_create(request, todo_list_pk):
 
     return render(request, "todos/item_form.html", {"form": form, "todo_list": todo_list})
 
+@login_required
 def item_edit(request, item_pk, todo_list_pk):
     item = get_object_or_404(Item, pk=item_pk, todo_list_id=todo_list_pk)
     form = ItemForm(instance=item)

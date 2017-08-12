@@ -17,5 +17,7 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'todos:create_item' todo_list_pk=todo_list.pk %}">New Item</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'todos:create_item' todo_list_pk=todo_list.pk %}">New Item</a>
+    {% endif %}
 {% endblock %}
