@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{% static 'css/layout.css' %}"/>
 </head>
 <body>
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
     <a href="{% url 'todos:todo_list_overview' %}">Overview</a>
 {% block content %} {% endblock %}
 </body>
