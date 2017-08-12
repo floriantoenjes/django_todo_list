@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
@@ -9,7 +10,8 @@ from .models import Item, TodoList
 
 def todo_list_overview(request):
     todo_lists = TodoList.objects.all()
-    return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists})
+    total = todo_lists.aggregate(total=Count("name"))
+    return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists, "total": total})
 
 def todo_list_detail(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
