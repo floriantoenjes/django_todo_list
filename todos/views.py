@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -30,7 +31,7 @@ class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
         obj = self.get_object()
         return "{} Details".format(obj.name)
 
-class TodoListDeleteView(DeleteView):
+class TodoListDeleteView(LoginRequiredMixin, DeleteView):
     model = TodoList
     template_name = "todos/todo_list_confirm_delete.html"
     success_url = reverse_lazy("todos:todo_list_overview")
