@@ -12,6 +12,7 @@ from django.views.generic import (
 from .forms import ItemForm, TodoListForm
 from .models import Item, TodoList
 
+
 class TodoListListView(CreateView, ListView):
     model = TodoList
     context_object_name = "todo_lists"
