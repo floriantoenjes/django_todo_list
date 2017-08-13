@@ -3,10 +3,24 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.views.generic import (
+    ListView, DetailView,
+    CreateView, UpdateView, DeleteView
+)
 
 from .forms import ItemForm, TodoListForm
 from .models import Item, TodoList
 
+class TodoListListView(CreateView, ListView):
+    model = TodoList
+    context_object_name = "todo_lists"
+    fields = ("name",)
+    template_name = "todos/todo_list_overview.html"
+
+class TodoListDetailView(UpdateView, DetailView):
+    fields = ("name", "order")
+    model = TodoList
+    template_name = "todos/todo_list_detail.html"
 
 def todo_list_overview(request):
     todo_lists = TodoList.objects.all()

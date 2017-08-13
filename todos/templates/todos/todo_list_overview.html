@@ -9,4 +9,13 @@
         <p><a href="{% url 'todos:todo_list' todo_list_pk=todo_list.pk%}">{{ todo_list.name }}</a></p>
         <p>created {{ todo_list.created_at }}</p>
     {% endfor %}
+    {% if user.is_authenticated %}
+        <div class="row">
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
