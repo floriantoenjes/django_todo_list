@@ -20,11 +20,15 @@ class TodoListListView(CreateView, ListView):
     fields = ("name",)
     template_name = "todos/todo_list_overview.html"
 
-class TodoListDetailView(UpdateView, DetailView):
+class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
     fields = ("name", "order")
     model = TodoList
     context_object_name = "todo_list"
     template_name = "todos/todo_list_detail.html"
+
+    def get_page_title(self):
+        obj = self.get_object()
+        return "{} Details".format(obj.name)
 
 class TodoListDeleteView(DeleteView):
     model = TodoList
