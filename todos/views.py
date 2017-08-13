@@ -20,6 +20,7 @@ class TodoListListView(CreateView, ListView):
 class TodoListDetailView(UpdateView, DetailView):
     fields = ("name", "order")
     model = TodoList
+    context_object_name = "todo_list"
     template_name = "todos/todo_list_detail.html"
 
 def todo_list_overview(request):
