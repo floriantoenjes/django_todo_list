@@ -10,6 +10,7 @@ from django.views.generic import (
 )
 
 from .forms import ItemForm, TodoListForm
+from .mixins import PageTitleMixin
 from .models import Item, TodoList
 
 
