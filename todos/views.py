@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
 from django.views.generic import (
     ListView, DetailView,
     CreateView, UpdateView, DeleteView
@@ -22,6 +23,12 @@ class TodoListDetailView(UpdateView, DetailView):
     model = TodoList
     context_object_name = "todo_list"
     template_name = "todos/todo_list_detail.html"
+
+class TodoListDeleteView(DeleteView):
+    model = TodoList
+    template_name = "todos/todo_list_confirm_delete.html"
+    success_url = reverse_lazy("todos:todo_list_overview")
+
 
 def todo_list_overview(request):
     todo_lists = TodoList.objects.all()

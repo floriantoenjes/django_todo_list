@@ -24,4 +24,6 @@
         {{ form.as_p }}
         <input type="submit" value="Update">
     </form>
+    <br/>
+    <a href="{% url 'todos:delete_todo_list' pk=todo_list.pk %}">Delete todo list</a>
 {% endblock %}
