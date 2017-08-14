@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -20,6 +20,11 @@ class TodoListListView(CreateView, ListView):
     context_object_name = "todo_lists"
     fields = ("name",)
     template_name = "todos/todo_list_overview.html"
+
+    def form_valid(self, form):
+        if  not self.request.user.is_authenticated:
+            return HttpResponseForbidden
+        return super(TodoListListView, self).form_valid(form)
 
 class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
     fields = ("name", "order")
