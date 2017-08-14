@@ -17,13 +17,16 @@
             </li>
         {% endfor %}
     </ul>
+    {% if user.is_authenticated %}
     <a href="{% url 'todos:create_item' todo_list_pk=todo_list.pk %}">New item</a>
     <br/>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update">
-    </form>
-    <br/>
-    <a href="{% url 'todos:delete_todo_list' pk=todo_list.pk %}">Delete todo list</a>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Update">
+        </form>
+        <br/>
+
+        <a href="{% url 'todos:delete_todo_list' pk=todo_list.pk %}">Delete todo list</a>
+    {% endif %}
 {% endblock %}
