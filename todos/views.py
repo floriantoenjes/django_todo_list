@@ -36,6 +36,11 @@ class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
         obj = self.get_object()
         return "{} Details".format(obj.name)
 
+    def form_valid(self, form):
+        if  not self.request.user.is_authenticated:
+            return HttpResponseForbidden
+        return super(TodoListDetailView, self).form_valid(form)
+
 class TodoListDeleteView(LoginRequiredMixin, DeleteView):
     model = TodoList
     template_name = "todos/todo_list_confirm_delete.html"
