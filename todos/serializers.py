@@ -11,5 +11,17 @@ class TodoListSerializer(serializers.ModelSerializer):
             "created_at",
             "order"
         )
-
         model = models.TodoList
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            "id",
+            "name",
+            "description",
+            "created_at",
+            "completed",
+            "order",
+            "todo_list"
+        )
+        model = models.Item
