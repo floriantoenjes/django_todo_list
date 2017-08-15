@@ -23,8 +23,8 @@ class TodoListListView(CreateView, ListView):
 
     def form_valid(self, form):
         if  not self.request.user.is_authenticated:
-            return HttpResponseForbidden
-        return super(TodoListListView, self).form_valid(form)
+            return HttpResponseForbidden()
+        return super().form_valid(form)
 
 class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
     fields = ("name", "order")
@@ -38,8 +38,8 @@ class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
 
     def form_valid(self, form):
         if  not self.request.user.is_authenticated:
-            return HttpResponseForbidden
-        return super(TodoListDetailView, self).form_valid(form)
+            return HttpResponseForbidden()
+        return super().form_valid(form)
 
 class TodoListDeleteView(LoginRequiredMixin, DeleteView):
     model = TodoList
