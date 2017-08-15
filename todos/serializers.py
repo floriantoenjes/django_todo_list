@@ -6,6 +6,7 @@ from . import models
 class TodoListSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
+            "id",
             "name",
             "created_at",
             "order"
