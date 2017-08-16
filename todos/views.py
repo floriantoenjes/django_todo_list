@@ -48,6 +48,7 @@ class TodoListDeleteView(LoginRequiredMixin, DeleteView):
 
 
 # Function views
+
 # def todo_list_overview(request):
 #     todo_lists = TodoList.objects.all()
 #     total = todo_lists.aggregate(total=Count("name"))
