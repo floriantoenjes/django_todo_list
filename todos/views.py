@@ -14,7 +14,7 @@ from .forms import ItemForm, TodoListForm
 from .mixins import PageTitleMixin
 from .models import Item, TodoList
 
-
+# Class based views
 class TodoListListView(CreateView, ListView):
     model = TodoList
     context_object_name = "todo_lists"
@@ -47,6 +47,7 @@ class TodoListDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("todos:todo_list_overview")
 
 
+# Function views
 def todo_list_overview(request):
     todo_lists = TodoList.objects.all()
     total = todo_lists.aggregate(total=Count("name"))
