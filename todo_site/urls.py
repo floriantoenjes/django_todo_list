@@ -19,6 +19,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r"^todos/", include("todos.urls", namespace="todos"),),
+    url(r"^api/v1/", include("todos.api_v1_urls", namespace="apiv1"),),
     url(r'^admin/', admin.site.urls),
 ]
 

@@ -1,21 +1,61 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Count
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView, DetailView,
+    CreateView, UpdateView, DeleteView
+)
 
 from .forms import ItemForm, TodoListForm
+from .mixins import PageTitleMixin
 from .models import Item, TodoList
 
+# Class based views
+class TodoListListView(CreateView, ListView):
+    model = TodoList
+    context_object_name = "todo_lists"
+    fields = ("name",)
+    template_name = "todos/todo_list_overview.html"
 
-def todo_list_overview(request):
-    todo_lists = TodoList.objects.all()
-    total = todo_lists.aggregate(total=Count("name"))
-    return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists, "total": total})
+    def form_valid(self, form):
+        if  not self.request.user.is_authenticated:
+            return HttpResponseForbidden()
+        return super().form_valid(form)
 
-def todo_list_detail(request, todo_list_pk):
-    todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
-    return render(request, "todos/todo_list_detail.html", {"todo_list": todo_list})
+class TodoListDetailView(PageTitleMixin, UpdateView, DetailView):
+    fields = ("name", "order")
+    model = TodoList
+    context_object_name = "todo_list"
+    template_name = "todos/todo_list_detail.html"
+
+    def get_page_title(self):
+        obj = self.get_object()
+        return "{} Details".format(obj.name)
+
+    def form_valid(self, form):
+        if  not self.request.user.is_authenticated:
+            return HttpResponseForbidden()
+        return super().form_valid(form)
+
+class TodoListDeleteView(LoginRequiredMixin, DeleteView):
+    model = TodoList
+    template_name = "todos/todo_list_confirm_delete.html"
+    success_url = reverse_lazy("todos:todo_list_overview")
+
+
+# Function views
+# def todo_list_overview(request):
+#     todo_lists = TodoList.objects.all()
+#     total = todo_lists.aggregate(total=Count("name"))
+#     return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists, "total": total})
+
+# def todo_list_detail(request, todo_list_pk):
+#     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
+#     return render(request, "todos/todo_list_detail.html", {"todo_list": todo_list})
 
 def todo_list_edit(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)

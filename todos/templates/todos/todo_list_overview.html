@@ -6,7 +6,16 @@
     <h1>Todo Lists</h1>
     <p>There {{ total.total|pluralize:"is, are" }} {{ total.total }} todo list{{ total.total|pluralize }}</p>
     {% for todo_list in todo_lists  %}
-        <p><a href="{% url 'todos:todo_list' todo_list_pk=todo_list.pk%}">{{ todo_list.name }}</a></p>
+        <p><a href="{% url 'todos:todo_list' pk=todo_list.pk%}">{{ todo_list.name }}</a></p>
         <p>created {{ todo_list.created_at }}</p>
     {% endfor %}
+    {% if user.is_authenticated %}
+        <div class="row">
+            <form method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
