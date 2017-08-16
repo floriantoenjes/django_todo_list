@@ -48,14 +48,14 @@ class TodoListDeleteView(LoginRequiredMixin, DeleteView):
 
 
 # Function views
-def todo_list_overview(request):
-    todo_lists = TodoList.objects.all()
-    total = todo_lists.aggregate(total=Count("name"))
-    return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists, "total": total})
+# def todo_list_overview(request):
+#     todo_lists = TodoList.objects.all()
+#     total = todo_lists.aggregate(total=Count("name"))
+#     return render(request, "todos/todo_list_overview.html", {"todo_lists": todo_lists, "total": total})
 
-def todo_list_detail(request, todo_list_pk):
-    todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
-    return render(request, "todos/todo_list_detail.html", {"todo_list": todo_list})
+# def todo_list_detail(request, todo_list_pk):
+#     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
+#     return render(request, "todos/todo_list_detail.html", {"todo_list": todo_list})
 
 def todo_list_edit(request, todo_list_pk):
     todo_list = get_object_or_404(TodoList, pk=todo_list_pk)
