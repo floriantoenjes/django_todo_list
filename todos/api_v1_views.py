@@ -23,3 +23,11 @@ class ListCreateItem(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         todo_list = get_object_or_404(models.TodoList, pk=self.kwargs.get("todo_list_pk"))
         serializer.save(todo_list=todo_list)
+
+class RetrieveUpdateDestroyItem(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Item.objects.all()
+    serializer_class = serializers.ItemSerializer
+
+    def get_object(self):
+        return get_object_or_404(models.Item, todo_list_id=self.kwargs.get("todo_list_pk"),
+                                 pk=self.kwargs.get("pk"))
