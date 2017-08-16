@@ -16,10 +16,18 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework import routers
+
+from todos import api_v2_views
+
+router = routers.SimpleRouter()
+router.register(r"todo_lists", api_v2_views.TodoListViewSet)
+
 
 urlpatterns = [
     url(r"^todos/", include("todos.urls", namespace="todos"),),
     url(r"^api/v1/", include("todos.api_v1_urls", namespace="apiv1"),),
+    url(r"^api/v2/", include(router.urls, namespace="apiv2"),),
     url(r'^admin/', admin.site.urls),
 ]
 
