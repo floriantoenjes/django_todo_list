@@ -26,6 +26,7 @@ router.register(r"todo_lists", api_v2_views.TodoListViewSet)
 
 urlpatterns = [
     url(r"^todos/", include("todos.urls", namespace="todos"),),
+    url(r"^accounts/", include("accounts.urls", namespace="accounts")),
     url(r"^api/v1/", include("todos.api_v1_urls", namespace="apiv1"),),
     url(r"^api/v2/", include(router.urls, namespace="apiv2"),),
     url(r'^admin/', admin.site.urls),
