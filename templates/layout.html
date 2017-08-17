@@ -12,7 +12,10 @@
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
-    <a href="{% url 'todos:todo_list_overview' %}">Overview</a>
+    <a href="{% url "todos:todo_list_overview" %}">Overview</a>
+    {% if not user.is_authenticated %}
+        <a href="{% url "login" %}">Login</a>
+    {% endif %}
 {% block content %} {% endblock %}
 </body>
 </html>
