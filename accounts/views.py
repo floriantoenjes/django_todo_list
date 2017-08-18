@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 
+from accounts.forms import UserCreateForm
+
 
 class LoginView(generic.FormView):
     form_class = AuthenticationForm
@@ -26,6 +28,6 @@ class LogoutView(generic.RedirectView):
         return super().get(request, *args, **kwargs)
 
 class SignUp(generic.CreateView):
-    form_class = UserCreationForm
+    form_class = UserCreateForm
     success_url = reverse_lazy("login")
     template_name = "accounts/signup.html"
